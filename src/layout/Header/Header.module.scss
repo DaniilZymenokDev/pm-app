@@ -1,0 +1,28 @@
+.header{
+  height: 80px;
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  background: white;
+  align-items: center;
+  padding: 0 24px;
+}
+.currentWorkers{
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  &>p{
+    font-size: 0.87rem;
+  }
+}
+.techInfoBar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 23%;
+  //&>div:nth-child(n){
+  //  margin-right: 20px;
+  //}
+}
