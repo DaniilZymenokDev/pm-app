@@ -1,0 +1,13 @@
+@import "src/assets/styles/global";
+
+.table {
+  max-width: 100%;
+  padding: 24px 21px;
+}
+
+.tableContainer {
+  background: $components-bg;
+  width: 100%;
+  min-height: 85vh;
+  border-radius: $border-radius;
+}

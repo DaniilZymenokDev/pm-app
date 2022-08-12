@@ -21,8 +21,18 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 23%;
-  //&>div:nth-child(n){
-  //  margin-right: 20px;
-  //}
+  //width: 24%;
+}
+.logoWithBtns{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  //min-width: 41%;
+  &>button{
+    margin-left: 24px;
+  }
+  &>button:nth-child(2n){
+    margin-left: 16px;
+    margin-right: 16px;
+  }
 }

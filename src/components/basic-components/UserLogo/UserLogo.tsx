@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './UserLogo.module.scss'
+import styles from '../basicComponents.module.scss'
 import userAvatar from '../../../assets/img/png/profile.png'
 
 type PropTypes = {

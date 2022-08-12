@@ -1,0 +1,13 @@
+.textInput{
+  & input::placeholder {
+    font-weight: 700;
+    font-size: 0.87rem;
+    line-height: 17px;
+    color: #767C87;
+  }
+  & input:active{
+    border-bottom: none;
+
+  }
+}
+

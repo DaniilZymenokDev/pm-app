@@ -1,10 +1,10 @@
 import React from 'react';
-import Layout from "./layout/Layout";
+import AllProjects from "./components/AllProjects/AllProjects";
 
 function App() {
   return (
     <div className="App">
-      <Layout/>
+        <AllProjects/>
     </div>
   );
 }

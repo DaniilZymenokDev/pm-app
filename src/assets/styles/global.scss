@@ -1,16 +1,33 @@
+$components-bg: #ffffff;
+$main-bg: #F4F6F9;
+$border-radius: 8px;
+$table-padding: 40px;
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #F4F6F9;
+  background: $main-bg;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
   monospace;
 }
-.layout{
+
+.layout {
+  min-width: 100%;
   max-width: 100%;
+  min-height: 100vh;
   max-height: 100vh;
+  display: flex;
+  flex-direction: row;
+  .sidebar{
+    width: 60px;
+    background: #002977;
+  }
+  .content {
+    width: 100%;
+    //height: 100vh;
+  }
 }

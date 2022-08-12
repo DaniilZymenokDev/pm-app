@@ -15,9 +15,11 @@ const Header = () => {
             </div>
             <div className={styles.techInfoBar}>
                 <Selector/>
-                <IconButton svgId={'MessageQuestion'} />
-                <IconButton svgId={'Notification'} />
-                <UserLogo/>
+                <div className={styles.logoWithBtns}>
+                    <IconButton svgId={'MessageQuestion'} />
+                    <IconButton svgId={'Notification'} />
+                    <UserLogo/>
+                </div>
             </div>
         </header>
     );

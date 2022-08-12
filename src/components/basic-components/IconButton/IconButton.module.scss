@@ -1,10 +1,21 @@
+@import "src/assets/styles/global";
 .iconButton{
+  background: $main-bg;
   width: 42px;
   height: 42px;
   display: flex;
   align-items: center;
   border-radius: 4px;
+  border:none;
+  cursor:pointer;
   &>svg{
     margin: 0 auto;
   }
+  //&:hover{
+  //  background: #203E7A;
+  //  transition: .3s ease all;
+  //  svg{
+  //    color: white; fill: white;
+  //  }
+  //}
 }
