@@ -6,7 +6,7 @@ type PropTypes = {
     userName?:string,
 }
 
-const UserLogo = (props:PropTypes) => {
+const UserLogo:React.FC<PropTypes> = (props) => {
     return (
         <div className={styles.userLogo}>
             <img src={userAvatar} alt="User logo"/>

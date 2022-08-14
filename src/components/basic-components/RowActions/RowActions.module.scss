@@ -1,0 +1,24 @@
+.iconButton > svg {
+  transform: rotate(90deg);
+}
+
+.menuItem {
+  display: flex;
+  font-size: 12px;
+  flex-direction: row;
+  svg {
+    width: 20px;
+  }
+}
+
+.menuList {
+  li {
+    width: 40px;
+    align-items: center;
+    padding: 0;
+  }
+}
+//width: '90px',
+//display: 'flex',
+//flexDirection: 'row',
+//justifyContent: 'space-around',

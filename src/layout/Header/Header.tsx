@@ -11,7 +11,7 @@ const Header = () => {
         <header className={styles.header}>
             <div className={styles.currentWorkers}>
                 <p>Current Running Workers</p>
-                <InputCounter/>
+                <InputCounter initialCount={20}/>
             </div>
             <div className={styles.techInfoBar}>
                 <Selector/>

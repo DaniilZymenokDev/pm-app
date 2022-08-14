@@ -2,12 +2,20 @@ $components-bg: #ffffff;
 $main-bg: #F4F6F9;
 $border-radius: 8px;
 $table-padding: 40px;
+$table-border: 1px solid #E4E4E4;
+$table-height: 85vh;
+$table-header-height:10vh;
 body {
   margin: 0;
   font-family: 'Lato', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: $main-bg;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
 }
 
 code {
@@ -22,12 +30,13 @@ code {
   max-height: 100vh;
   display: flex;
   flex-direction: row;
-  .sidebar{
+
+  .sidebar {
     width: 60px;
     background: #002977;
   }
+
   .content {
     width: 100%;
-    //height: 100vh;
   }
 }

@@ -1,9 +1,13 @@
 import React from 'react';
+import EnhancedTable from "../../basic-components/ItemsTable/ItemsTable";
+import styles from './ConnectionsTable.module.scss'
+import './globalTableStyles.scss'
 
-const ConnectionsTable = () => {
+const ConnectionsTable: React.FC = () => {
+
     return (
-        <div>
-
+        <div className={styles.connectionsTable}>
+            <EnhancedTable/>
         </div>
     );
 };

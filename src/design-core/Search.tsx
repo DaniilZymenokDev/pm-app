@@ -4,11 +4,12 @@ import {IconButton} from "@mui/material";
 import SvgSelector from "../components/basic-components/SvgSelector/SvgSelector";
 import styles from './DesignCore.module.scss'
 
-const Search = () => {
+const Search: React.FC = () => {
+
     return (
         <TextField
             className={styles.textInput}
-            sx={{ width: '97px' }}
+            sx={{width: '97px'}}
             placeholder={"Search"}
             variant="standard"
             InputProps={{

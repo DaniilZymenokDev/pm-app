@@ -1,0 +1,18 @@
+.creatorCard{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: fit-content;
+  background: rgba(10, 156, 238, 0.1);
+  color: #0A9CEE;
+  border: 1px solid #0A9CEE;
+  border-radius: 18px;
+  padding: 0 10px;
+  text-decoration: none;
+  img{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+}

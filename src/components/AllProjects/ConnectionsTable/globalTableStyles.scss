@@ -1,0 +1,24 @@
+@import '/src/assets/styles/global';
+
+.MuiPaper-root{
+  margin-bottom: 0 !important;
+}
+.MuiTablePagination-root {
+  align-items: center;
+  height: 65px;
+  display: flex;
+  border-top: $table-border;
+  padding: 0 $table-padding !important;
+  flex-direction: row;
+  justify-content: space-between;
+  .MuiToolbar-root div > div {
+    font-weight: 700;
+  }
+
+  .MuiToolbar-root p {
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    color: #4F535A;
+  }
+}

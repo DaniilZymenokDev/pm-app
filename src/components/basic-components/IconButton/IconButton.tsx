@@ -5,7 +5,7 @@ import SvgSelector from "../SvgSelector/SvgSelector";
 type PropTypes ={
     svgId: string,
 }
-const IconButton = (props:PropTypes) => {
+const IconButton :React.FC<PropTypes> = (props) => {
 
     return (
         <button className={styles.iconButton}>

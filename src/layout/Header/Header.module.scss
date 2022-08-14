@@ -21,13 +21,11 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  //width: 24%;
 }
 .logoWithBtns{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  //min-width: 41%;
   &>button{
     margin-left: 24px;
   }

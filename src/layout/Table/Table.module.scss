@@ -2,12 +2,12 @@
 
 .table {
   max-width: 100%;
-  padding: 24px 21px;
+  padding: 24px 21px 21px 21px;
 }
 
 .tableContainer {
   background: $components-bg;
   width: 100%;
-  min-height: 85vh;
+  min-height: $table-height;
   border-radius: $border-radius;
 }

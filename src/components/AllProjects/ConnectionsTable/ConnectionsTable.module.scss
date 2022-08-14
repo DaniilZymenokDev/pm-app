@@ -1,0 +1,44 @@
+@import '/src/assets/styles/global';
+.connectionsTable{
+  min-height: ($table-height - $table-header-height);
+  &>div{
+    min-height: ($table-height - $table-header-height);
+  }
+  &>div>div{
+    min-height: ($table-height - $table-header-height);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  & div{
+    box-shadow: none;
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+  }
+  th, td {
+    border: none;
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #767C87;
+    text-align: left;
+  }
+  td{
+    padding: 15px $table-padding;
+  }
+
+  & table>thead>tr span{
+    font-weight: 700;
+    font-size: 0.875rem;
+    color: #4F535A;
+  }
+  & table>thead>tr>th:first-child{
+    padding: 20px 0 20px 40px;
+  }
+  & tbody>tr:nth-child(odd){
+    background: #FAFBFD;
+  }
+
+}
