@@ -9,7 +9,7 @@ import ConnectionsTable from "./ConnectionsTable/ConnectionsTable";
 import HorizontalNonLinearStepper from "../NewConnectionStepper/NewConnection";
 
 const AllProjects: React.FC = () => {
-    const [isModal, setIsModal] = useState(true);
+    const [isModal, setIsModal] = useState(false);
 
     const openModalWindow = (): void => {
         setIsModal(!isModal)
