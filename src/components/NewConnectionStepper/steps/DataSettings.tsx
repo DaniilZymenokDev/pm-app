@@ -3,9 +3,9 @@ import styles from '../NewConnection.module.scss'
 import { Input, Select, MenuItem } from '@mui/material';
 
 type PropTypes = {
-    connectionName:string,
-    setConnectionName:any,
-    dataSource:string,
+    connectionName?:string,
+    setConnectionName:Dispatch<SetStateAction<string>>,
+    dataSource?:string,
     setDataSource: Dispatch<SetStateAction<string>>,
 }
 

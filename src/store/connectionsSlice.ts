@@ -11,6 +11,10 @@ type Connection = {
     dataSource: string,
     createdBy: [string, string],
     createdOn: number,
+    userName: string,
+    password: string,
+    configuration:object,
+    configurationString: string,
 }
 type ConnectionState = {
     list: Connection,
@@ -22,6 +26,10 @@ const initialState: ConnectionState = {
         dataSource: '',
         createdBy: ['', ''],
         createdOn: 0,
+        userName: '',
+        password:'',
+        configuration:[],
+        configurationString:''
     },
 }
 
@@ -41,7 +49,20 @@ const connectionsReducer = createSlice({
         addCreatedOn:(state, action)=>{
             state.list.createdOn = action.payload;
         },
+        addUserName:(state, action)=>{
+            state.list.userName = action.payload;
+        },
+        addPassword:(state, action)=>{
+            state.list.password = action.payload;
+        },
+        addConfig:(state, action)=>{
+            state.list.configuration = action.payload; //rewrite this
+        },
+        addConfigString:(state, action)=>{
+            state.list.configurationString = action.payload;
+        },
     }
 });
-export const {addConnectionName,addDataSource, addCreatedBy, addCreatedOn} = connectionsReducer.actions;
+export const {addConnectionName,addDataSource, addCreatedBy, addCreatedOn, addUserName, addPassword} = connectionsReducer.actions;
+export const connectionsReducerActions = connectionsReducer.actions;
 export default connectionsReducer.reducer;

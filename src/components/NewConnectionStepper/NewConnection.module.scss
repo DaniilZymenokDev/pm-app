@@ -1,16 +1,17 @@
-.modalBack{
+.modalBack {
   height: 100vh;
   width: 100vw;
   background-color: rgba(183, 183, 183, 0.4);
   position: fixed;
-  top:0;
-  left:0;
+  top: 0;
+  left: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 5;
 }
-.modalContent{
+
+.modalContent {
   width: 534px !important;
   opacity: 1;
   padding: 20px 0;
@@ -18,7 +19,8 @@
   box-shadow: 0 6px 30px rgba(181, 185, 192, 0.2);
   border-radius: 8px;
 }
-.stepperHeader{
+
+.stepperHeader {
   padding: 0 20px;
   display: flex;
   flex-direction: row;
@@ -26,14 +28,16 @@
   justify-content: space-between;
   border-bottom: 1px solid #E4E4E4;
   margin-bottom: 30px;
-  p{
+
+  p {
     font-weight: 700;
     font-size: 16px;
     line-height: 1.1875rem;
     color: #4F535A;
 
   }
-  &>button>svg{
+
+  & > button > svg {
     border: 1.5px solid #767C87;
     border-radius: 20px;
     width: 20px;
@@ -41,13 +45,19 @@
     padding: 2px;
   }
 }
-.stepper{
+
+.stepper {
   padding: 0 20px;
 }
-.stepperBody{
+
+.stepperBody {
   padding: 0 20px;
 }
-.stepperBtns button{
+.stepperBtns{
+  padding: 0 !important;
+  margin: 0;
+}
+.stepperBtns button {
   width: 123px;
   height: 32px;
   font-weight: 700;
@@ -57,17 +67,27 @@
   border: 1px solid #E4E4E4;
   color: #4F535A;
 }
-.stepperBtns>button:last-child{
+
+.stepperBtns > button:last-child {
   background: #1C96F2;
-  color:white;
+  color: white;
 }
-.stepContentBody{
+
+.stepContentBody {
   display: flex;
   flex-direction: column;
-  padding: 20px;
-  height: 200px;
+  padding: 20px 0 0 0 ;
+  height: 250px;
+
+  & > p {
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 20px 0 -20px 0;
+  }
 }
-.stepContentBody label{
+
+.stepContentBody label {
   font-weight: 700;
   font-size: 14px;
   line-height: 17px;
@@ -75,8 +95,71 @@
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  width: 80%;
-  & input,div{
+  width: 100%;
+
+  & input, div {
+    margin-top: 10px;
+  }
+}
+.parametersActive {
+  overflow: auto;
+  margin-top: 20px;
+  max-height: 140px;
+
+  & > div label {
+    margin-top: 0;
+  }
+}
+.addParamBlock {
+  display: flex;
+  flex-direction: row;
+  color: #1C96F2;
+  cursor: pointer;
+  height: 20px;
+  width: 40%;
+  & svg {
+    fill: #1C96F2 !important;
+  }
+  & p{
+    margin: 0;
+  }
+}
+
+.paramsItem {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  & label {
+    width: 40%;
+  }
+
+  & label > select {
+    width: 30%;
+  }
+
+  & label > input {
+    width: 30%;
+  }
+
+  & input, div {
+    margin-top: 0px;
+  }
+  & >button{
+    height: 30px;
+  }
+}
+
+.paramsItemList {
+
+  max-height: 210px;
+  .txtArea{
+    width: 99%;
+    border:none;
+    background: #F4F6F9;
+    border-radius: 4px;
+    height: 120px !important;
     margin-top: 10px;
   }
 }

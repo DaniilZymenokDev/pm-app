@@ -11,8 +11,8 @@ import {IconButton} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import DataSettings from "./steps/DataSettings";
 import Credentials from "./steps/Credentials";
-import {useAppDispatch, useAppSelector} from "../../store/hooks";
-import {addConnectionName} from "../../store/connectionsSlice";
+import {useActions, useAppDispatch, useAppSelector} from "../../store/hooks";
+import Configuration from "./steps/Configuration";
 
 const steps = ['1', '2', '3'];
 type PropTypes = {
@@ -22,7 +22,6 @@ type PropTypes = {
 
 export default function HorizontalNonLinearStepper(props: PropTypes) {
 
-    const dispatch = useAppDispatch();
     const [connectionsList, setConnectionsList] = useState([]);
     const connectionStore = useAppSelector(state => state.projectsConnections);
 
@@ -32,10 +31,7 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
     }>({});
     console.log(connectionStore);
 
-    const [connectionName, setConnectionName] = useState('');
-    const [dataSource, setDataSource] = useState('');
-    const [userName, setUserName] = useState('');
-    const [password, setPassword] = useState('');
+
 
     const totalSteps = () => {
         return steps.length;
@@ -70,16 +66,18 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
     const handleStep = (step: number) => () => {
         setActiveStep(step);
     };
+
+    const {addConnectionName,addDataSource, addCreatedBy, addCreatedOn, addUserName, addPassword, addConfig, addConfigString}=useActions();
     const getStepContent = (step: number) => {
         switch (step) {
             case 0:
-                return <DataSettings connectionName={connectionName} setConnectionName={setConnectionName}
-                                     dataSource={dataSource} setDataSource={setDataSource}/>
+                return <DataSettings  setConnectionName={(e:any)=>{addConnectionName(e)}}
+                                     setDataSource={(e:any)=>{addDataSource(e)}}/>
             case 1:
-                return <Credentials userName={userName} setUserName={setUserName} password={password}
-                                    setPassword={setPassword}/>
+                return <Credentials setUserName={(e:any)=>{addUserName(e)}}
+                                    setPassword={(e:any)=>{addPassword(e)}}/>
             case 2:
-                return <p>Third step</p>
+                return <Configuration/>
         }
     }
 
@@ -114,7 +112,6 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
                     {steps.map((label, index) => (
                         <Step key={label} completed={completed[index]}>
                             <StepButton color="inherit" onClick={handleStep(index)}>
-                                {label}
                             </StepButton>
                         </Step>
                     ))}

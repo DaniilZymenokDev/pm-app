@@ -7,7 +7,60 @@
   }
   & input:active{
     border-bottom: none;
-
   }
 }
+.toggleGroup{
+  display: flex;
+  width: 100% !important;
+  border: 1px solid #F4F6F9;
+  border-radius: 4px;
+}
+.toggleGroup button{
+  width: 50%;
+  padding: 4px;
+  border:none;
+}
+.toggleGroup p{
+  display: block;
+  width: 100%;
+  padding: 9px 20px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 14px;
+
+  color: #767C87;
+}
+.toggleGroup>button:hover{
+  background-color: white;
+}
+.toggleGroup>button:focus{
+  background-color: white;
+  transition: .5s all ease;
+  p{
+    background: rgba(28, 150, 242, 0.1);
+    border-radius: 4px;
+    font-weight: 700;
+    color: #1C96F2;
+  }
+  &:hover{
+    background-color: white;
+  }
+  &:active{
+    background-color: white;
+    transition: .5s all ease;
+    p{
+      background: rgba(28, 150, 242, 0.1);
+      border-radius: 4px;
+      font-weight: 700;
+      color: #1C96F2;
+    }
+    &:hover{
+      background-color: white;
+    }
+
+  }
+
+}
+
 
