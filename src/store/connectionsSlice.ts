@@ -6,28 +6,42 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 //     createdBy:'',
 //     createdOn:'',
 // }
-type Connections = {
+type Connection = {
     connectionName: string,
     dataSource: string,
     createdBy: [string, string],
     createdOn: number,
 }
-type ConnectionsState = {
-    list: Connections[];
+type ConnectionState = {
+    list: Connection,
 }
 
-const initialState: ConnectionsState = {
-    list: [],
+const initialState: ConnectionState = {
+    list: {
+        connectionName: '',
+        dataSource: '',
+        createdBy: ['', ''],
+        createdOn: 0,
+    },
 }
 
 const connectionsReducer = createSlice({
     name: 'projectsConnections',
     initialState: initialState,
     reducers: {
-        addConnection: (state, action:PayloadAction<Array<Connections>>) => {
-            state.list = [...state.list, ...action.payload];
-        }
+        addConnectionName:(state, action)=>{
+            state.list.connectionName = action.payload;
+        },
+        addDataSource:(state, action)=>{
+            state.list.dataSource = action.payload;
+        },
+        addCreatedBy:(state, action)=>{
+            state.list.createdBy = action.payload;
+        },
+        addCreatedOn:(state, action)=>{
+            state.list.createdOn = action.payload;
+        },
     }
 });
-export const {addConnection} = connectionsReducer.actions;
+export const {addConnectionName,addDataSource, addCreatedBy, addCreatedOn} = connectionsReducer.actions;
 export default connectionsReducer.reducer;

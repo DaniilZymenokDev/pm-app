@@ -15,6 +15,7 @@ const AllProjects: React.FC = () => {
         setIsModal(!isModal)
     }
 
+
     return (
         <Layout>
             {isModal && <HorizontalNonLinearStepper active={isModal} setActive={setIsModal}/>}

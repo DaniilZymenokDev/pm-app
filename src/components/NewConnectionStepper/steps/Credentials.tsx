@@ -4,7 +4,7 @@ import {Input} from "@mui/material";
 
 type PropTypes = {
     userName:string,
-    setUserName:Dispatch<SetStateAction<string>>,
+    setUserName:any,
     password: string,
     setPassword: Dispatch<SetStateAction<string>>,
 }
