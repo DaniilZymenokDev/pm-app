@@ -6,66 +6,33 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 //     createdBy:'',
 //     createdOn:'',
 // }
-type Connection = {
+export type Connection = {
     connectionName: string,
     dataSource: string,
-    createdBy: [string, string],
-    createdOn: number,
+    createdBy: string,
+    createdOn: string,
     userName: string,
     password: string,
-    configuration:object,
-    configurationString: string,
+    configuration:string,
+    connectionString: string,
 }
-type ConnectionState = {
-    list: Connection,
-}
+// type ConnectionState = {
+//     list: Array<Connection>
+// }
 
-const initialState: ConnectionState = {
-    list: {
-        connectionName: '',
-        dataSource: '',
-        createdBy: ['', ''],
-        createdOn: 0,
-        userName: '',
-        password:'',
-        configuration:[],
-        configurationString:''
-    },
-}
+export const initialState: Array<Connection> = [];
 
 const connectionsReducer = createSlice({
     name: 'projectsConnections',
     initialState: initialState,
     reducers: {
-        addConnectionName:(state, action)=>{
-            state.list.connectionName = action.payload;
-        },
-        addDataSource:(state, action)=>{
-            state.list.dataSource = action.payload;
-        },
-        addCreatedBy:(state, action)=>{
-            state.list.createdBy = action.payload;
-        },
-        addCreatedOn:(state, action)=>{
-            state.list.createdOn = action.payload;
-        },
-        addUserName:(state, action)=>{
-            state.list.userName = action.payload;
-        },
-        addPassword:(state, action)=>{
-            state.list.password = action.payload;
-        },
-        addConfig:(state, action)=>{
-            state.list.configuration = action.payload; //rewrite this
-        },
-        addConfigString:(state, action)=>{
-            state.list.configurationString = action.payload;
-        },
-        defaultState:(state)=>{
-            return initialState;
+        addConnection:(state, action:PayloadAction<Connection>)=>{
+            console.log(action.payload)
+            state.push(action.payload);
+            console.log(state);
         }
     }
 });
-export const {addConnectionName,addDataSource, addCreatedBy, addCreatedOn, addUserName, addPassword, defaultState} = connectionsReducer.actions;
 export const connectionsReducerActions = connectionsReducer.actions;
+export const {addConnection} = connectionsReducerActions;
 export default connectionsReducer.reducer;

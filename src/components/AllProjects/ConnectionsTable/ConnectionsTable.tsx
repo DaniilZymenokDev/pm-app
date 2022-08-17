@@ -8,9 +8,7 @@ type PropTypes={
 }
 
 const ConnectionsTable = (props:PropTypes) => {
-    console.log(props.list);
 
-    // @ts-ignore
     return (
         <div className={styles.connectionsTable}>
             <EnhancedTable />

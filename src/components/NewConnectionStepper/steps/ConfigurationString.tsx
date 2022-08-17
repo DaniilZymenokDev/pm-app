@@ -1,16 +1,17 @@
-import React from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from "../NewConnection.module.scss";
 import {TextareaAutosize} from "@mui/material";
-import {useActions} from "../../../store/hooks";
 
-const ConfigurationString = () => {
+type PropTypes={
+    setConnectionString:(value:string)=>void
+}
 
-    const {addConfigString}=useActions();
+const ConfigurationString = (props:PropTypes) => {
 
     return (
         <div className={styles.parametersActive}>
             <div className={styles.paramsItemList}>
-                <TextareaAutosize  onChange={(e:any)=>{addConfigString(e.target.value)}} className={styles.txtArea}/>
+                <TextareaAutosize  onChange={(e:ChangeEvent<HTMLTextAreaElement>)=>{props.setConnectionString(e.target.value)}} className={styles.txtArea}/>
             </div>
         </div>
     );

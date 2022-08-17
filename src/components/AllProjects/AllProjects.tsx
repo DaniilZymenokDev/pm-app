@@ -7,6 +7,7 @@ import {Button} from "@mui/material";
 import SvgSelector from "../basic-components/SvgSelector/SvgSelector";
 import ConnectionsTable from "./ConnectionsTable/ConnectionsTable";
 import HorizontalNonLinearStepper from "../NewConnectionStepper/NewConnection";
+import {useAppSelector} from "../../store/hooks";
 
 
 const AllProjects: React.FC = () => {

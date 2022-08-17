@@ -5,9 +5,12 @@ import SvgSelector from "../../basic-components/SvgSelector/SvgSelector";
 import ConfigurationParams from "./ConfigurationParams";
 import ConfigurationString from "./ConfigurationString";
 
-const Configuration = () => {
+type PropTypes = {
+    setConnectionString:(value:string)=>void
+}
+
+const Configuration = (props:PropTypes) => {
     const [isParams, setIsParams] = useState(true);
-    const [configParams, setConfigParams] = useState([]);
     const [faqIndexes, setFaqIndexes] = useState<number[]>([0]);
     const [faqCounter, setFaqCounter] = useState(0);
 
@@ -27,7 +30,7 @@ const Configuration = () => {
             <ToggleButtons isParams={isParams} setIsParams={setIsParams}/>
             {isParams ? <p>Configuration</p> : <p>Connection String</p>}
             {isParams ? <ConfigurationParams addItem={addItem} removeItem={removeItem} faqIndexes={faqIndexes}/> :
-                <ConfigurationString/>}
+                <ConfigurationString setConnectionString={props.setConnectionString}/>}
             {isParams && <button onClick={addItem} className={styles.addParamBlock}>
                 <SvgSelector id={"Add"}/>
                 <p>Add Parameters</p>

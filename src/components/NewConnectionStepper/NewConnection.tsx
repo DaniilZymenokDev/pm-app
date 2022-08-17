@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Dispatch, SetStateAction, useState} from 'react';
+import {Dispatch, SetStateAction, useReducer} from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -11,19 +11,67 @@ import {IconButton} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import DataSettings from "./steps/DataSettings";
 import Credentials from "./steps/Credentials";
-import {useActions, useAppDispatch, useAppSelector} from "../../store/hooks";
+import {useAppSelector} from "../../store/hooks";
 import Configuration from "./steps/Configuration";
+import type {Connection} from "../../store/connectionsSlice";
+import {addConnection as addConnectionSlice} from '../../store/connectionsSlice';
+import {plus} from '../../store/counterSlice';
 
 const steps = ['1', '2', '3'];
 type PropTypes = {
     active: boolean,
     setActive: Dispatch<SetStateAction<boolean>>,
-    setList:Function;
+    setList: Function;
 }
 
+enum ConnectionActionTypes {
+    addConnectionName = 'addConnectionName',
+    addDataSource = 'addDataSource',
+    addCreatedOn = 'addCreatedOn',
+    addCreatedBy = 'addCreatedBy',
+    addUserName = 'addUserName',
+    addPassword = 'addPassword',
+    addConfiguration = 'addConfiguration',
+    addConnectionString = 'addConnectionString',
+}
+
+type ConnectionAction = {
+    type: ConnectionActionTypes, payload: string;
+}
+const newConnectionReducer = (state: Connection, action: ConnectionAction) => {
+    switch (action.type) {
+        case ConnectionActionTypes.addConnectionName:
+            return {...state, connectionName: action.payload}
+        case ConnectionActionTypes.addDataSource:
+            return {...state, dataSource: action.payload}
+        case ConnectionActionTypes.addCreatedBy:
+            return {...state, createdBy: action.payload}
+        case ConnectionActionTypes.addUserName:
+            return {...state, userName: action.payload}
+        case ConnectionActionTypes.addPassword:
+            return {...state, password: action.payload}
+        case ConnectionActionTypes.addConfiguration:
+            return {...state, configuration: action.payload}
+        case ConnectionActionTypes.addConnectionString:
+            return {...state, connection: action.payload}
+        default:
+            return state
+    }
+}
 export default function HorizontalNonLinearStepper(props: PropTypes) {
 
-    const connectionStore = useAppSelector(state => state.projectsConnections);
+
+    const [connectionState, connectionDispatch] = useReducer(newConnectionReducer,
+        {
+            connectionName: '',
+            dataSource: '',
+            createdBy: '',
+            createdOn: '0',
+            userName: '',
+            password: '',
+            configuration: '',
+            connectionString: '',
+        });
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState<{
@@ -64,21 +112,26 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         setActiveStep(step);
     };
 
-    const {addConnectionName,addDataSource,
-        addCreatedBy, addCreatedOn,
-        addUserName, addPassword, addConfig,
-        addConfigString, defaultState}=useActions();
-
     const getStepContent = (step: number) => {
         switch (step) {
             case 0:
-                return <DataSettings  setConnectionName={(e:any)=>{addConnectionName(e)}}
-                                     setDataSource={(e:any)=>{addDataSource(e)}}/>
+                return <DataSettings setConnectionName={(value: string) => {
+                    connectionDispatch({type: ConnectionActionTypes.addConnectionName, payload: value})
+                }}
+                                     setDataSource={(value: string) => {
+                                         connectionDispatch({type: ConnectionActionTypes.addDataSource, payload: value})
+                                     }}/>
             case 1:
-                return <Credentials setUserName={(e:any)=>{addUserName(e)}}
-                                    setPassword={(e:any)=>{addPassword(e)}}/>
+                return <Credentials setUserName={(value: string) => {
+                    connectionDispatch({type: ConnectionActionTypes.addUserName, payload: value})
+                }}
+                                    setPassword={(value: string) => {
+                                        connectionDispatch({type: ConnectionActionTypes.addPassword, payload: value})
+                                    }}/>
             case 2:
-                return <Configuration/>
+                return <Configuration setConnectionString={(value: string) => {
+                    connectionDispatch({type: ConnectionActionTypes.addConnectionString, payload: value})
+                }}/>
         }
     }
 
@@ -89,8 +142,7 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         handleNext();
         if (completedSteps() === totalSteps()) {
             props.setActive(false);
-            props.setList((prevList:Array<object>)=>[...prevList, connectionStore]);
-            defaultState();
+            addConnectionSlice(connectionState);
         }
     };
 
