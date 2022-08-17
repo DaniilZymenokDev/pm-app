@@ -21,7 +21,6 @@ import { visuallyHidden } from '@mui/utils';
 import styles from './ItemsTable.module.scss'
 import TableCreatorCard from "../tableCreatorCard/TableCreatorCard";
 import LongMenu from "../RowActions/RowActions";
-import {useContext} from "react";
 
 interface Data {
     name: string;
@@ -136,6 +135,7 @@ interface EnhancedTableProps {
     order: Order;
     orderBy: string;
     rowCount: number;
+    list?:any;
 }
 
 function EnhancedTableHead(props: EnhancedTableProps) {

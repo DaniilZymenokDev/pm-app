@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {createContext, useState} from 'react';
 import Layout from "../../layout/Layout";
 import styles from './AllProjects.module.scss'
 import ActiveLastBreadcrumb from "../basic-components/Breadcrumb/ActiveLastBreadcrumb";
@@ -7,7 +7,6 @@ import {Button} from "@mui/material";
 import SvgSelector from "../basic-components/SvgSelector/SvgSelector";
 import ConnectionsTable from "./ConnectionsTable/ConnectionsTable";
 import HorizontalNonLinearStepper from "../NewConnectionStepper/NewConnection";
-import ConnectionsContext from "../../context/ConnectionsContext";
 
 
 const AllProjects: React.FC = () => {
@@ -19,7 +18,6 @@ const AllProjects: React.FC = () => {
     }
 
     return (
-        <ConnectionsContext.Provider value={connectionsList}>
             <Layout>
                 {isModal && <HorizontalNonLinearStepper setList={setConnectionsList} active={isModal} setActive={setIsModal}/>}
                 <div className={styles.tableHeader}>
@@ -31,9 +29,9 @@ const AllProjects: React.FC = () => {
                             Add new Connection </Button>
                     </div>
                 </div>
-                <ConnectionsTable />
-        </Layout>
-        </ConnectionsContext.Provider>
+                <ConnectionsTable list = {connectionsList}/>
+
+            </Layout>
 
     );
 };
