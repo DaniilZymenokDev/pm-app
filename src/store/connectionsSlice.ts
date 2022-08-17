@@ -61,8 +61,11 @@ const connectionsReducer = createSlice({
         addConfigString:(state, action)=>{
             state.list.configurationString = action.payload;
         },
+        defaultState:(state)=>{
+            return initialState;
+        }
     }
 });
-export const {addConnectionName,addDataSource, addCreatedBy, addCreatedOn, addUserName, addPassword} = connectionsReducer.actions;
+export const {addConnectionName,addDataSource, addCreatedBy, addCreatedOn, addUserName, addPassword, defaultState} = connectionsReducer.actions;
 export const connectionsReducerActions = connectionsReducer.actions;
 export default connectionsReducer.reducer;

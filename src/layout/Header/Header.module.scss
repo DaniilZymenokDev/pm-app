@@ -21,6 +21,9 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  &>.MuiFormControl-root{
+    background-color: #F4F6F9;
+  }
 }
 .logoWithBtns{
   display: flex;

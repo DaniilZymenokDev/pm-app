@@ -18,20 +18,17 @@ const steps = ['1', '2', '3'];
 type PropTypes = {
     active: boolean,
     setActive: Dispatch<SetStateAction<boolean>>,
+    setList:Function;
 }
 
 export default function HorizontalNonLinearStepper(props: PropTypes) {
 
-    const [connectionsList, setConnectionsList] = useState([]);
     const connectionStore = useAppSelector(state => state.projectsConnections);
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [completed, setCompleted] = React.useState<{
         [k: number]: boolean;
     }>({});
-    console.log(connectionStore);
-
-
 
     const totalSteps = () => {
         return steps.length;
@@ -67,7 +64,11 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         setActiveStep(step);
     };
 
-    const {addConnectionName,addDataSource, addCreatedBy, addCreatedOn, addUserName, addPassword, addConfig, addConfigString}=useActions();
+    const {addConnectionName,addDataSource,
+        addCreatedBy, addCreatedOn,
+        addUserName, addPassword, addConfig,
+        addConfigString, defaultState}=useActions();
+
     const getStepContent = (step: number) => {
         switch (step) {
             case 0:
@@ -88,7 +89,8 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         handleNext();
         if (completedSteps() === totalSteps()) {
             props.setActive(false);
-            //add data from dispatch to state-list
+            props.setList((prevList:Array<object>)=>[...prevList, connectionStore]);
+            defaultState();
         }
     };
 

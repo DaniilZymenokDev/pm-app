@@ -21,6 +21,7 @@ import { visuallyHidden } from '@mui/utils';
 import styles from './ItemsTable.module.scss'
 import TableCreatorCard from "../tableCreatorCard/TableCreatorCard";
 import LongMenu from "../RowActions/RowActions";
+import {useContext} from "react";
 
 interface Data {
     name: string;
@@ -48,9 +49,6 @@ function createData(
 
 const rows = [
     createData('Azure SQL1', 'Azure', 'Alex Kim', '07/06/2022', <LongMenu/>),
-    createData('Azure SQL2', 'Azure', 'Jessica', '07/06/2022', <LongMenu/>),
-    createData('Azure SQL3', 'Azure', 'Lee Henry', '07/06/2022', <LongMenu/>),
-    createData('Azure SQL4', 'Azure', 'William', '07/06/2022', <LongMenu/>),
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -147,6 +145,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
         (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
             onRequestSort(event, property);
         };
+
 
     return (
         <TableHead>
@@ -284,7 +283,6 @@ export default function EnhancedTable() {
                 selected.slice(selectedIndex + 1),
             );
         }
-
         setSelected(newSelected);
     };
 
@@ -297,13 +295,10 @@ export default function EnhancedTable() {
         setPage(0);
     };
 
-
-
     const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
-    const emptyRows =
-        page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (
         <Box sx={{ width: '100%', height:"100%" }} >
