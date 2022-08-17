@@ -15,7 +15,7 @@ const DataSettings = (props:PropTypes) => {
         <div className={styles.stepContentBody}>
             <label htmlFor="">
                 Data Connection Name *
-                <Input value={props.connectionName} onChange={(e:any)=>{props.setConnectionName(e.target.value)}}  />
+                <Input value={props.connectionName} onChange={(e:any)=>{props.setConnectionName(e.target.value)}}/>
             </label>
             <label htmlFor="">
                 Data Source *

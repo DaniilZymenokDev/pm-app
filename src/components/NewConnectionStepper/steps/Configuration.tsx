@@ -7,16 +7,31 @@ import ConfigurationString from "./ConfigurationString";
 
 const Configuration = () => {
     const [isParams, setIsParams] = useState(true);
+    const [configParams, setConfigParams] = useState([]);
+    const [faqIndexes, setFaqIndexes] = useState<number[]>([0]);
+    const [faqCounter, setFaqCounter] = useState(0);
+
+    const removeItem = (index: number): void => {
+        setFaqIndexes((prevIndexes) => [
+            ...prevIndexes.filter((item) => item !== index),
+        ]);
+    }
+    const addItem = (): void => {
+        setFaqIndexes((prevIndexes) => [...prevIndexes, faqCounter]);
+        setFaqCounter((prevCounter) => prevCounter + 1);
+        console.log(faqCounter)
+    }
 
     return (
         <div className={styles.stepContentBody}>
             <ToggleButtons isParams={isParams} setIsParams={setIsParams}/>
-            {isParams ? <p>Configuration</p> : <p>Connection String</p> }
-            {isParams ? <ConfigurationParams/> : <ConfigurationString/>}
-            {isParams && <div className={styles.addParamBlock}>
-                <SvgSelector id={'Add'}/>
+            {isParams ? <p>Configuration</p> : <p>Connection String</p>}
+            {isParams ? <ConfigurationParams addItem={addItem} removeItem={removeItem} faqIndexes={faqIndexes}/> :
+                <ConfigurationString/>}
+            {isParams && <button onClick={addItem} className={styles.addParamBlock}>
+                <SvgSelector id={"Add"}/>
                 <p>Add Parameters</p>
-            </div>}
+            </button>}
         </div>
     );
 };
