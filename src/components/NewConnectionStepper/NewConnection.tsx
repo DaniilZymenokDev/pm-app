@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Dispatch, SetStateAction, useReducer} from 'react';
+import {Dispatch, SetStateAction, useReducer, useState} from 'react';
 import Box from '@mui/material/Box';
 import Stepper from '@mui/material/Stepper';
 import Step from '@mui/material/Step';
@@ -12,9 +12,10 @@ import CloseIcon from '@mui/icons-material/Close';
 import DataSettings from "./steps/DataSettings";
 import Credentials from "./steps/Credentials";
 import Configuration from "./steps/Configuration";
-import type {Connection} from "../../store/connectionsSlice";
-import connectionsReducer, {addConnection} from '../../store/connectionsSlice';
+import type {Connection, Parameter} from "../../store/connectionsSlice";
+import {addConnection} from '../../store/connectionsSlice';
 import {useAppDispatch} from '../../store/hooks';
+import {addConnection as postConnectionToApi} from '../../api/index';
 
 const steps = ['1', '2', '3'];
 type PropTypes = {
@@ -37,31 +38,32 @@ enum ConnectionActionTypes {
 type ConnectionAction = {
     type: ConnectionActionTypes, payload: string;
 }
-const newConnectionReducer = (state: Connection, action: ConnectionAction) => {
+
+const newConnectionReducer = (state: Omit<Connection, "parameters">, action: ConnectionAction) => {
     switch (action.type) {
         case ConnectionActionTypes.addConnectionName:
-            return {...state, connectionName: action.payload}
+            return {...state, name: action.payload}
         case ConnectionActionTypes.addDataSource:
-            return {...state, dataSource: action.payload}
+            return {...state, data_source: action.payload}
         case ConnectionActionTypes.addCreatedBy:
-            return {...state, createdBy: action.payload}
+            return {...state, created_by: action.payload}
         case ConnectionActionTypes.addUserName:
-            return {...state, userName: action.payload}
+            return {...state, user_name: action.payload}
         case ConnectionActionTypes.addPassword:
             return {...state, password: action.payload}
-        case ConnectionActionTypes.addConfiguration:
-            return {...state, configuration: action.payload}
         case ConnectionActionTypes.addConnectionString:
-            return {...state, connectionString: action.payload}
+            return {...state, connection_string: action.payload}
         case ConnectionActionTypes.addCreatedOn:
-            return {...state, createdOn: action.payload}
+            return {...state, created_on: action.payload}
         default:
             return state
     }
 }
 export default function HorizontalNonLinearStepper(props: PropTypes) {
 
-    const getDate = ():string =>{
+    const [parameters, setParameters] = useState<Array<Parameter>>([]);
+
+    const getDate = (): string => {
         const date = new Date();
         return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
     }
@@ -69,14 +71,14 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
     const dispatch = useAppDispatch();
     const [connectionState, connectionDispatch] = useReducer(newConnectionReducer,
         {
-            connectionName: '',
-            dataSource: '',
-            createdBy: '',
-            createdOn: `${getDate()}`,
-            userName: '',
+            name: '',
+            data_source: '',
+            created_by: '',
+            created_on: `${getDate()}`,
+            connection_string: '',
+            project_id: `${Date.now()}`,
+            user_name: '',
             password: '',
-            configuration: '',
-            connectionString: '',
         });
 
     const [activeStep, setActiveStep] = React.useState(0);
@@ -141,7 +143,6 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         }
     }
 
-
     const handleComplete = () => {
         const newCompleted = completed;
         newCompleted[activeStep] = true;
@@ -149,7 +150,8 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         handleNext();
         if (completedSteps() === totalSteps()) {
             props.setActive(false);
-            dispatch(addConnection(connectionState));
+            dispatch(addConnection({...connectionState, parameters}));
+            postConnectionToApi({...connectionState, parameters});
         }
     };
 

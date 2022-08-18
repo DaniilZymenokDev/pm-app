@@ -6,15 +6,20 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 //     createdBy:'',
 //     createdOn:'',
 // }
+export type Parameter = {
+    param_id: number,
+    param_value: string
+}
 export type Connection = {
-    connectionName: string,
-    dataSource: string,
-    createdBy: string,
-    createdOn: string,
-    userName: string,
+    name: string,
+    data_source: string,
+    created_by: string,
+    created_on: string,
+    connection_string: string,
+    parameters: Array<Parameter>,
+    project_id: string,
+    user_name: string,
     password: string,
-    configuration: string,
-    connectionString: string,
 }
 
 export const initialState: Array<Connection> = [];
@@ -26,9 +31,9 @@ const connectionsReducer = createSlice({
         addConnection: (state, action: PayloadAction<Connection>) => {
             state.push(action.payload);
         },
-        addManyConnections:(state, action: PayloadAction<Array<Connection>>)=>{
+        addManyConnections: (state, action: PayloadAction<Array<Connection>>) => {
             //TODO:rewrite with concat-method
-            action.payload.map((item)=>(
+            action.payload.map((item) => (
                 state.push(item)
             ))
         }

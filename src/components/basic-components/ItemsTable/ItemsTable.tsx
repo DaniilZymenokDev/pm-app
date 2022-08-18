@@ -303,7 +303,7 @@ export default function EnhancedTable() {
     ];
     connectionsList.map((row)=>(
         rows.push(
-            createData(row.connectionName, row.dataSource, row.createdBy, row.createdOn, <LongMenu/>),
+            createData(row.name, row.data_source, row.created_by, row.created_on, <LongMenu/>),
         )
     ))
 
