@@ -61,13 +61,18 @@ const newConnectionReducer = (state: Connection, action: ConnectionAction) => {
 }
 export default function HorizontalNonLinearStepper(props: PropTypes) {
 
+    const getDate = ():string =>{
+        const date = new Date();
+        return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+    }
+
     const dispatch = useAppDispatch();
     const [connectionState, connectionDispatch] = useReducer(newConnectionReducer,
         {
             connectionName: '',
             dataSource: '',
             createdBy: '',
-            createdOn: '0',
+            createdOn: `${getDate()}`,
             userName: '',
             password: '',
             configuration: '',
@@ -135,10 +140,7 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
                 }}/>
         }
     }
-    const getDate = ():string =>{
-        const date = new Date();
-        return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
-    }
+
 
     const handleComplete = () => {
         const newCompleted = completed;
@@ -147,9 +149,6 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         handleNext();
         if (completedSteps() === totalSteps()) {
             props.setActive(false);
-            console.log(connectionState)
-            connectionDispatch({type: ConnectionActionTypes.addCreatedOn, payload: getDate()});
-            console.log(connectionState)
             dispatch(addConnection(connectionState));
         }
     };
