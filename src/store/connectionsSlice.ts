@@ -25,9 +25,15 @@ const connectionsReducer = createSlice({
     reducers: {
         addConnection: (state, action: PayloadAction<Connection>) => {
             state.push(action.payload);
+        },
+        addManyConnections:(state, action: PayloadAction<Array<Connection>>)=>{
+            //TODO:rewrite with concat-method
+            action.payload.map((item)=>(
+                state.push(item)
+            ))
         }
     }
 });
 export const connectionsReducerActions = connectionsReducer.actions;
-export const {addConnection} = connectionsReducerActions;
+export const {addConnection, addManyConnections} = connectionsReducerActions;
 export default connectionsReducer.reducer;
