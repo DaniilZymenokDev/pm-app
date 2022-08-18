@@ -4,7 +4,7 @@ import styles from './ConnectionsTable.module.scss'
 import './globalTableStyles.scss'
 
 type PropTypes={
-    list: Array<any>;
+    list: Array<object>;
 }
 
 const ConnectionsTable = (props:PropTypes) => {

@@ -21,6 +21,8 @@ import { visuallyHidden } from '@mui/utils';
 import styles from './ItemsTable.module.scss'
 import TableCreatorCard from "../tableCreatorCard/TableCreatorCard";
 import LongMenu from "../RowActions/RowActions";
+import {useAppSelector} from "../../../store/hooks";
+import {useEffect, useState} from "react";
 
 interface Data {
     name: string;
@@ -46,9 +48,6 @@ function createData(
     };
 }
 
-const rows = [
-    createData('Azure SQL1', 'Azure', 'Alex Kim', '07/06/2022', <LongMenu/>),
-];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
     if (b[orderBy] < a[orderBy]) {
@@ -298,6 +297,17 @@ export default function EnhancedTable() {
     const isSelected = (name: string) => selected.indexOf(name) !== -1;
 
     // Avoid a layout jump when reaching the last page with empty rows.
+    const connectionsList = useAppSelector(state=>state.projectsConnections);
+
+    const rows = [
+        createData('Azure SQL1', 'Azure', 'Alex Kim', '07/06/2022', <LongMenu/>),
+    ];
+    connectionsList.map((row)=>(
+        rows.push(
+            createData(row.connectionName, row.dataSource, row.createdBy, row.createdOn, <LongMenu/>),
+        )
+    ))
+
     const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
     return (

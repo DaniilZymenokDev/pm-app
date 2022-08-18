@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from 'react';
 import styles from "../NewConnection.module.scss";
-import {TextareaAutosize} from "@mui/material";
+import {TextareaAutosize, Input} from "@mui/material";
 
 type PropTypes={
     setConnectionString:(value:string)=>void

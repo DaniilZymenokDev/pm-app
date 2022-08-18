@@ -13,12 +13,9 @@ export type Connection = {
     createdOn: string,
     userName: string,
     password: string,
-    configuration:string,
+    configuration: string,
     connectionString: string,
 }
-// type ConnectionState = {
-//     list: Array<Connection>
-// }
 
 export const initialState: Array<Connection> = [];
 
@@ -26,10 +23,8 @@ const connectionsReducer = createSlice({
     name: 'projectsConnections',
     initialState: initialState,
     reducers: {
-        addConnection:(state, action:PayloadAction<Connection>)=>{
-            console.log(action.payload)
+        addConnection: (state, action: PayloadAction<Connection>) => {
             state.push(action.payload);
-            console.log(state);
         }
     }
 });

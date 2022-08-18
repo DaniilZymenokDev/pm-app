@@ -11,11 +11,10 @@ import {IconButton} from "@mui/material";
 import CloseIcon from '@mui/icons-material/Close';
 import DataSettings from "./steps/DataSettings";
 import Credentials from "./steps/Credentials";
-import {useAppSelector} from "../../store/hooks";
 import Configuration from "./steps/Configuration";
 import type {Connection} from "../../store/connectionsSlice";
-import {addConnection as addConnectionSlice} from '../../store/connectionsSlice';
-import {plus} from '../../store/counterSlice';
+import connectionsReducer, {addConnection} from '../../store/connectionsSlice';
+import {useAppDispatch} from '../../store/hooks';
 
 const steps = ['1', '2', '3'];
 type PropTypes = {
@@ -53,14 +52,16 @@ const newConnectionReducer = (state: Connection, action: ConnectionAction) => {
         case ConnectionActionTypes.addConfiguration:
             return {...state, configuration: action.payload}
         case ConnectionActionTypes.addConnectionString:
-            return {...state, connection: action.payload}
+            return {...state, connectionString: action.payload}
+        case ConnectionActionTypes.addCreatedOn:
+            return {...state, createdOn: action.payload}
         default:
             return state
     }
 }
 export default function HorizontalNonLinearStepper(props: PropTypes) {
 
-
+    const dispatch = useAppDispatch();
     const [connectionState, connectionDispatch] = useReducer(newConnectionReducer,
         {
             connectionName: '',
@@ -134,6 +135,10 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
                 }}/>
         }
     }
+    const getDate = ():string =>{
+        const date = new Date();
+        return `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+    }
 
     const handleComplete = () => {
         const newCompleted = completed;
@@ -142,7 +147,10 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         handleNext();
         if (completedSteps() === totalSteps()) {
             props.setActive(false);
-            addConnectionSlice(connectionState);
+            console.log(connectionState)
+            connectionDispatch({type: ConnectionActionTypes.addCreatedOn, payload: getDate()});
+            console.log(connectionState)
+            dispatch(addConnection(connectionState));
         }
     };
 

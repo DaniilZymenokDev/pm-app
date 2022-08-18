@@ -1,11 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
 import connectionsReducer from './connectionsSlice';
-import counterSlice from "./counterSlice";
 
 const store = configureStore({
     reducer:{
         projectsConnections:connectionsReducer,
-        counterReducer: counterSlice //!!!
     }
 });
 
