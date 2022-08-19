@@ -8,12 +8,15 @@ type PropTypes = {
 }
 
 const DataSettings = (props:PropTypes) => {
+    // const stepValidator = (props.setIsValid):void=>{
+    //
+    // }
 
     return (
         <div className={styles.stepContentBody}>
             <label htmlFor="">
                 Data Connection Name *
-                <Input defaultValue={""} onChange={(e:ChangeEvent<HTMLInputElement>)=>{props.setConnectionName(e.target.value)}}/>
+                <Input defaultValue={""}  onChange={(e:ChangeEvent<HTMLInputElement>)=>{props.setConnectionName(e.target.value)}}/>
             </label>
             <label htmlFor="">
                 Data Source *

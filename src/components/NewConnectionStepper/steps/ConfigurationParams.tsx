@@ -41,7 +41,7 @@ const ConfigurationParams = (props:PropTypes) => {
                             <IconButton
                                 aria-label="more"
                                 id="long-button"
-                                onClick={props.removeItem(index)}
+                                onClick={()=>props.removeItem(index)}
                             >
                                 <SvgSelector id={"Trash"}/>
                             </IconButton>
