@@ -114,6 +114,7 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
                     : activeStep + 1;
             setActiveStep(newActiveStep);
         }
+        setIsValid(false)
     };
 
     const handleBack = () => {
@@ -150,7 +151,7 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
                                         connectionDispatch({type: ConnectionActionTypes.addPassword, payload: value})
                                     }}/>
             case 2:
-                return <Configuration setConnectionString={(value: string) => {
+                return <Configuration state={connectionState} isValid={isValid} setIsValid={setIsValid} setConnectionString={(value: string) => {
                     connectionDispatch({type: ConnectionActionTypes.addConnectionString, payload: value})
                 }}/>
         }

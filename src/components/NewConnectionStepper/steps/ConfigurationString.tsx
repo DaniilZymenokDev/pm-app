@@ -11,7 +11,7 @@ const ConfigurationString = (props:PropTypes) => {
     return (
         <div className={styles.parametersActive}>
             <div className={styles.paramsItemList}>
-                <TextareaAutosize  onChange={(e:ChangeEvent<HTMLTextAreaElement>)=>{props.setConnectionString(e.target.value)}} className={styles.txtArea}/>
+                <TextareaAutosize   onChange={(e:ChangeEvent<HTMLTextAreaElement>)=>{props.setConnectionString(e.target.value);}} className={styles.txtArea}/>
             </div>
         </div>
     );
