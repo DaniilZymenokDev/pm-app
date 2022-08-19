@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useState} from 'react';
+import React, {ChangeEvent} from 'react';
 import styles from '../NewConnection.module.scss'
 import {MenuItem, Select, SelectChangeEvent, TextField} from '@mui/material';
 
@@ -14,13 +14,15 @@ type PropTypes = {
 const DataSettings = (props: PropTypes) => {
     const errors:Array<string>=["Maximum length: 100 letters."]
     let inputError:string="";
-    const validation = (list: string, secondList:string): void => {
-            if (list.length<100 && props.state.data_source) {
+    const validation = (list: string, secondList:string): string => {
+            inputError=errors[0]
+            if (list.length<100 && secondList) {
                 props.setIsValid(true)
             }else if(list.length>100){
                 inputError=errors[0]
                 props.setIsValid(false)
             }
+            return inputError=errors[0]
     }
 
     return (

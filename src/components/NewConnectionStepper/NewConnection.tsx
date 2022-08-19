@@ -143,7 +143,7 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
                                          connectionDispatch({type: ConnectionActionTypes.addDataSource, payload: value})
                                      }}/>
             case 1:
-                return <Credentials setUserName={(value: string) => {
+                return <Credentials state={connectionState} isValid={isValid} setIsValid={setIsValid} setUserName={(value: string) => {
                     connectionDispatch({type: ConnectionActionTypes.addUserName, payload: value})
                 }}
                                     setPassword={(value: string) => {
