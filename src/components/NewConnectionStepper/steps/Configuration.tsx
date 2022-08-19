@@ -6,13 +6,13 @@ import ConfigurationParams from "./ConfigurationParams";
 import ConfigurationString from "./ConfigurationString";
 
 type PropTypes = {
-    setConnectionString:(value:string)=>void,
+    setConnectionString: (value: string) => void,
     setIsValid: (value: boolean) => void,
     state: any
     isValid: boolean,
 }
 
-const Configuration = (props:PropTypes) => {
+const Configuration = (props: PropTypes) => {
     const [isParams, setIsParams] = useState(true);
     const [faqIndexes, setFaqIndexes] = useState<number[]>([0]);
     const [faqCounter, setFaqCounter] = useState(0);
@@ -27,7 +27,6 @@ const Configuration = (props:PropTypes) => {
         setFaqCounter((prevCounter) => prevCounter + 1);
         console.log(faqCounter)
     }
-
 
 
     return (

@@ -16,7 +16,6 @@ import type {Connection, Parameter} from "../../store/connectionsSlice";
 import {addConnection} from '../../store/connectionsSlice';
 import {useAppDispatch} from '../../store/hooks';
 import {addConnection as postConnectionToApi} from '../../api/index';
-import {SubmitHandler, useForm} from "react-hook-form";
 
 const steps = ['1', '2', '3'];
 type PropTypes = {
@@ -103,7 +102,7 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         return completedSteps() === totalSteps();
     };
     const [isValid, setIsValid] = useState(false);
-    console.log(isValid)
+
     const handleNext = () => {
         if (isValid) {
             const newActiveStep =
@@ -130,30 +129,36 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         dataSource: string,
     }
 
-    const {handleSubmit, control} = useForm<DataSettings>();
-    const onSubmit: SubmitHandler<any> = (data) => console.log(data);
-
 
     const getStepContent = (step: number) => {
         switch (step) {
             case 0:
-                return <DataSettings state={connectionState} isValid={isValid} setIsValid={setIsValid} setConnectionName={(value: string) => {
-                    connectionDispatch({type: ConnectionActionTypes.addConnectionName, payload: value})
-                }}
+                return <DataSettings state={connectionState} isValid={isValid} setIsValid={setIsValid}
+                                     setConnectionName={(value: string) => {
+                                         connectionDispatch({
+                                             type: ConnectionActionTypes.addConnectionName,
+                                             payload: value
+                                         })
+                                     }}
                                      setDataSource={(value: string) => {
                                          connectionDispatch({type: ConnectionActionTypes.addDataSource, payload: value})
                                      }}/>
             case 1:
-                return <Credentials state={connectionState} isValid={isValid} setIsValid={setIsValid} setUserName={(value: string) => {
-                    connectionDispatch({type: ConnectionActionTypes.addUserName, payload: value})
-                }}
+                return <Credentials state={connectionState} isValid={isValid} setIsValid={setIsValid}
+                                    setUserName={(value: string) => {
+                                        connectionDispatch({type: ConnectionActionTypes.addUserName, payload: value})
+                                    }}
                                     setPassword={(value: string) => {
                                         connectionDispatch({type: ConnectionActionTypes.addPassword, payload: value})
                                     }}/>
             case 2:
-                return <Configuration state={connectionState} isValid={isValid} setIsValid={setIsValid} setConnectionString={(value: string) => {
-                    connectionDispatch({type: ConnectionActionTypes.addConnectionString, payload: value})
-                }}/>
+                return <Configuration state={connectionState} isValid={isValid} setIsValid={setIsValid}
+                                      setConnectionString={(value: string) => {
+                                          connectionDispatch({
+                                              type: ConnectionActionTypes.addConnectionString,
+                                              payload: value
+                                          })
+                                      }}/>
         }
     }
 

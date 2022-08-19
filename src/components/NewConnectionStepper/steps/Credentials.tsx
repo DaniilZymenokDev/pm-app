@@ -46,7 +46,7 @@ const Credentials = (props:PropTypes) => {
             </label>
             <label htmlFor="">
                 Password*
-                <TextField  error={isError && true} onChange={(e:any)=> {props.setPassword(e.target.value);validation(props.state.password, e.target.value)}} type={"password"}/>
+                <TextField  error={isError && true} onChange={(e:any)=> {props.setPassword(e.target.value);validation(props.state.password, e.target.value)}} placeholder={"Enter password"} type={"password"} size={"small"}/>
             </label>
         </div>
     );
