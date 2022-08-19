@@ -102,16 +102,18 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
     const allStepsCompleted = () => {
         return completedSteps() === totalSteps();
     };
-
+    const [isValid, setIsValid] = useState(false);
+    console.log(isValid)
     const handleNext = () => {
-        const newActiveStep =
-            isLastStep() && !allStepsCompleted()
-                ? // It's the last step, but not all steps have been completed,
-                  // find the first step that has been completed
-                steps.findIndex((step, i) => !(i in completed))
-                : activeStep + 1;
-
-        setActiveStep(newActiveStep);
+        if (isValid) {
+            const newActiveStep =
+                isLastStep() && !allStepsCompleted()
+                    ? // It's the last step, but not all steps have been completed,
+                      // find the first step that has been completed
+                    steps.findIndex((step, i) => !(i in completed))
+                    : activeStep + 1;
+            setActiveStep(newActiveStep);
+        }
     };
 
     const handleBack = () => {
@@ -122,16 +124,19 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         setActiveStep(step);
     };
 
+    interface DataSettings {
+        connectionName: string,
+        dataSource: string,
+    }
 
-
-
-    const {handleSubmit, control} = useForm();
+    const {handleSubmit, control} = useForm<DataSettings>();
+    const onSubmit: SubmitHandler<any> = (data) => console.log(data);
 
 
     const getStepContent = (step: number) => {
         switch (step) {
             case 0:
-                return <DataSettings handleSubmit={handleSubmit} control={control} setConnectionName={(value: string) => {
+                return <DataSettings state={connectionState} isValid={isValid} setIsValid={setIsValid} setConnectionName={(value: string) => {
                     connectionDispatch({type: ConnectionActionTypes.addConnectionName, payload: value})
                 }}
                                      setDataSource={(value: string) => {
@@ -152,10 +157,12 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
     }
 
     const handleComplete = () => {
-        const newCompleted = completed;
-        newCompleted[activeStep] = true;
-        setCompleted(newCompleted);
-        handleNext();
+        if (isValid) {
+            const newCompleted = completed;
+            newCompleted[activeStep] = true;
+            setCompleted(newCompleted);
+            handleNext()
+        }
         if (completedSteps() === totalSteps()) {
             props.setActive(false);
             dispatch(addConnection({...connectionState, parameters}));
@@ -213,18 +220,16 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
                                     Cancel
                                 </Button>
 
-                                {activeStep !== steps.length &&
-                                    (completed[activeStep] ? (
-                                        <Typography variant="caption" sx={{display: 'inline-block'}}>
-                                            Step {activeStep + 1} already completed
-                                        </Typography>
-                                    ) : (
+                                {activeStep !== steps.length && isValid ?
+                                    (
                                         <Button onClick={handleComplete}>
                                             {completedSteps() === totalSteps() - 1
                                                 ? 'Save'
                                                 : 'Next'}
                                         </Button>
-                                    ))}
+                                    ) : <Button>
+                                        Next
+                                    </Button>}
                             </Box>
                         </React.Fragment>
                     )}

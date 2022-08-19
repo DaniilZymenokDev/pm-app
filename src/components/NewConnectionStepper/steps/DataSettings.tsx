@@ -1,52 +1,49 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import styles from '../NewConnection.module.scss'
-import {Input, Select, MenuItem, SelectChangeEvent, TextField} from '@mui/material';
-import {Controller, Control, FieldValues, useForm, SubmitHandler, useFormState} from "react-hook-form";
+import {MenuItem, Select, SelectChangeEvent, TextField} from '@mui/material';
 
 
 type PropTypes = {
-    setConnectionName:(value:string)=>void,
-    setDataSource: (value:string)=>void,
-    handleSubmit:any,
-    control: any
+    setConnectionName: (value: string) => void,
+    setDataSource: (value: string) => void,
+    setIsValid: (value: boolean) => void,
+    state: any
+    isValid: boolean,
 }
-interface DataSettings{
-    connectionName:string,
-    dataSource:string,
-}
-const DataSettings = (props:PropTypes) => {
 
-    const onSubmit: SubmitHandler<any> = (data) =>console.log(data);
-    const {errors} = useFormState({props.control});
-    console.log('Errors: ', errors);
+const DataSettings = (props: PropTypes) => {
+    const errors:Array<string>=["Maximum length: 100 letters."]
+    let inputError:string="";
+    const validation = (list: string, secondList:string): void => {
+            if (list.length<100 && props.state.data_source) {
+                props.setIsValid(true)
+            }else if(list.length>100){
+                inputError=errors[0]
+                props.setIsValid(false)
+            }
+    }
+
     return (
         <div className={styles.stepContentBody}>
-            <form action="" onSubmit={props.handleSubmit(onSubmit)}>
-                <Controller
-                    rules={{required:true}}
-                    control={props.control}
-                    name="connectionName"
-                    render={({field})=>(
-                        <label htmlFor="">
-                            Data Connection Name *
-                            <TextField helperText={errors.connectionName?.message} size={"small"} value={field.value} defaultValue={""}  onChange={(e:ChangeEvent<HTMLInputElement>)=>{props.setConnectionName(e.target.value);field.onChange(e)}}/>
-                        </label>
-                    )}
-                />
-                <Controller
-                    control={props.control}
-                    name="dataSource"
-                    render={({field})=>(
-                        <label htmlFor="">
-                            Data Source *
-                            <Select value={field.value} defaultValue={""} onChange={(e:SelectChangeEvent<string>)=>{props.setDataSource(e.target.value);field.onChange(e)}} size={"small"}>
-                                <MenuItem value={'azureSQL'}>Azure SQL</MenuItem>
-                                <MenuItem value={'oracleDb'}>Oracle DB</MenuItem>
-                                <MenuItem value={'CSV'}>CSV</MenuItem>
-                            </Select>
-                        </label>
-                    )}
-                />
+            <form action="">
+                <label htmlFor="">
+                    Data Connection Name *
+                    <TextField error={!props.isValid && true} value={props.state.name} helperText={!props.isValid && inputError} size={"small"} defaultValue={""}
+                               onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                                   props.setConnectionName(e.target.value);
+                               }}/>
+                </label>
+
+                <label htmlFor="">
+                    Data Source *
+                    <Select error={!props.isValid && true} defaultValue={""} value={props.state.data_source} onChange={(e: SelectChangeEvent<string>) => {
+                        props.setDataSource(e.target.value);validation(props.state.name, e.target.value)
+                    }} size={"small"}>
+                        <MenuItem value={'azureSQL'}>Azure SQL</MenuItem>
+                        <MenuItem value={'oracleDb'}>Oracle DB</MenuItem>
+                        <MenuItem value={'CSV'}>CSV</MenuItem>
+                    </Select>
+                </label>
             </form>
 
 
