@@ -16,6 +16,7 @@ import type {Connection, Parameter} from "../../store/connectionsSlice";
 import {addConnection} from '../../store/connectionsSlice';
 import {useAppDispatch} from '../../store/hooks';
 import {addConnection as postConnectionToApi} from '../../api/index';
+import {SubmitHandler, useForm} from "react-hook-form";
 
 const steps = ['1', '2', '3'];
 type PropTypes = {
@@ -109,6 +110,7 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
                   // find the first step that has been completed
                 steps.findIndex((step, i) => !(i in completed))
                 : activeStep + 1;
+
         setActiveStep(newActiveStep);
     };
 
@@ -120,10 +122,16 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
         setActiveStep(step);
     };
 
+
+
+
+    const {handleSubmit, control} = useForm();
+
+
     const getStepContent = (step: number) => {
         switch (step) {
             case 0:
-                return <DataSettings setConnectionName={(value: string) => {
+                return <DataSettings handleSubmit={handleSubmit} control={control} setConnectionName={(value: string) => {
                     connectionDispatch({type: ConnectionActionTypes.addConnectionName, payload: value})
                 }}
                                      setDataSource={(value: string) => {
