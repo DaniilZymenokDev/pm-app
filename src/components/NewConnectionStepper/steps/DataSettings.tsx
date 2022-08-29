@@ -55,8 +55,8 @@ const DataSettings = (props: PropTypes) => {
                                 props.setDataSource(e.target.value);
                                 validation(props.state.name, e.target.value)
                             }} size={"small"}>
-                        <MenuItem value={'azureSQL'}>Azure SQL</MenuItem>
-                        <MenuItem value={'oracleDb'}>Oracle DB</MenuItem>
+                        <MenuItem value={'Azure SQL'}>Azure SQL</MenuItem>
+                        <MenuItem value={'Oracle DB'}>Oracle DB</MenuItem>
                         <MenuItem value={'CSV'}>CSV</MenuItem>
                     </Select>
                 </label>

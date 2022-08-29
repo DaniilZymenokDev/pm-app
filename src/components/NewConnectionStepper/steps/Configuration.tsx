@@ -28,7 +28,7 @@ const Configuration = (props: PropTypes) => {
         console.log(faqCounter)
     }
 
-
+    props.setIsValid(true);
     return (
         <div className={styles.stepContentBody}>
             <ToggleButtons isParams={isParams} setIsParams={setIsParams}/>
