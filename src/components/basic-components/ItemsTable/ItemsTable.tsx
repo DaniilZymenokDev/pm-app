@@ -27,24 +27,24 @@ import Connection from '../../../store/connectionsSlice'
 
 interface Data {
     name: string;
-    dataSource: string;
-    createdBy: string;
-    createdOn: string;
+    data_source: string;
+    created_by: string;
+    created_on: string;
     actions: string;
 }
 
 function createData(
     name: string,
-    dataSource: string,
-    createdBy: string,
-    createdOn: string,
+    data_source: string,
+    created_by: string,
+    created_on: string,
     actions: any,
 ): Data {
     return {
         name,
-        dataSource,
-        createdBy,
-        createdOn,
+        data_source,
+        created_by,
+        created_on,
         actions,
     };
 }
@@ -103,19 +103,19 @@ const headCells: readonly HeadCell[] = [
         label: 'Connections',
     },
     {
-        id: 'dataSource',
+        id: 'data_source',
         numeric: true,
         disablePadding: false,
         label: 'Data source',
     },
     {
-        id: 'createdBy',
+        id: 'created_by',
         numeric: true,
         disablePadding: false,
         label: 'Created by',
     },
     {
-        id: 'createdOn',
+        id: 'created_on',
         numeric: true,
         disablePadding: false,
         label: 'Created on',
@@ -245,7 +245,7 @@ type TablePropTypes = {
 }
 export default function EnhancedTable(props:TablePropTypes) {
     const [order, setOrder] = React.useState<Order>('asc');
-    const [orderBy, setOrderBy] = React.useState<keyof Data>('dataSource');
+    const [orderBy, setOrderBy] = React.useState<keyof Data>('data_source');
     const [selected, setSelected] = React.useState<readonly string[]>([]);
     const [page, setPage] = React.useState(0);
     const [dense, setDense] = React.useState(false);
@@ -320,7 +320,9 @@ export default function EnhancedTable(props:TablePropTypes) {
     
     const rows = [
         createData('Azure SQL1', 'Azure', 'Alex Kim', '07/06/2022', <LongMenu/>),
+        createData('Azure SQL2', 'Azure', 'Andrew', '02/05/2022', <LongMenu/>),
     ];
+    
     filteredList.map((row)=>(
         rows.push(
             createData(row.name, row.data_source, row.created_by, row.created_on, <LongMenu/>),
@@ -382,11 +384,11 @@ export default function EnhancedTable(props:TablePropTypes) {
                                             >
                                                 {row.name}
                                             </TableCell>
-                                            <TableCell align="left">{row.dataSource}</TableCell>
+                                            <TableCell align="left">{row.data_source}</TableCell>
                                             <TableCell align="right">
-                                                <TableCreatorCard name={row.createdBy}/>
+                                                <TableCreatorCard name={row.created_by}/>
                                             </TableCell>
-                                            <TableCell align="right">{row.createdOn}</TableCell>
+                                            <TableCell align="right">{row.created_on}</TableCell>
                                             <TableCell align="right">{row.actions}</TableCell>
                                         </TableRow>
                                     );
