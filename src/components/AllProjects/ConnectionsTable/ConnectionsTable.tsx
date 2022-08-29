@@ -8,10 +8,13 @@ import {addManyConnections} from "../../../store/connectionsSlice";
 import {getConnections} from "../../../api";
 
 type PropTypes = {
-    list: Array<object>;
+    list: Array<object>,
+    searchValue:string,
 }
 
 const ConnectionsTable = (props: PropTypes) => {
+
+    
 
     const dispatch = useAppDispatch();
     useEffect(() => {
@@ -22,7 +25,7 @@ const ConnectionsTable = (props: PropTypes) => {
     }, [])
     return (
         <div className={styles.connectionsTable}>
-            <EnhancedTable/>
+            <EnhancedTable searchValue={props.searchValue}/>
         </div>
     );
 };

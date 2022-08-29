@@ -22,6 +22,8 @@ import styles from './ItemsTable.module.scss'
 import TableCreatorCard from "../tableCreatorCard/TableCreatorCard";
 import LongMenu from "../RowActions/RowActions";
 import {useAppSelector} from "../../../store/hooks";
+import { useEffect, useState } from 'react';
+import Connection from '../../../store/connectionsSlice'
 
 interface Data {
     name: string;
@@ -238,8 +240,10 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
         </Toolbar>
     );
 };
-
-export default function EnhancedTable() {
+type TablePropTypes = {
+    searchValue:string,
+}
+export default function EnhancedTable(props:TablePropTypes) {
     const [order, setOrder] = React.useState<Order>('asc');
     const [orderBy, setOrderBy] = React.useState<keyof Data>('dataSource');
     const [selected, setSelected] = React.useState<readonly string[]>([]);
@@ -297,11 +301,27 @@ export default function EnhancedTable() {
 
     // Avoid a layout jump when reaching the last page with empty rows.
     const connectionsList = useAppSelector(state=>state.projectsConnections);
+    const [filteredList, setFilteredList] = useState(connectionsList);
 
+    // Array<typeof Connection>
+    const filterConnections = (searchValue:string, connectionsList: any) =>{
+        if(!searchValue){return connectionsList}
+        //@ts-ignore
+        return connectionsList.filter(({name})=> name.toLowerCase().includes(searchValue.toLowerCase()));
+    }
+    
+    useEffect(()=>{
+        const Debounce = setTimeout(()=>{
+            const filteredConnections = filterConnections(props.searchValue, connectionsList);
+            setFilteredList(filteredConnections);
+        })
+        return ()=> clearTimeout(Debounce);
+    },[connectionsList, props.searchValue])
+    
     const rows = [
         createData('Azure SQL1', 'Azure', 'Alex Kim', '07/06/2022', <LongMenu/>),
     ];
-    connectionsList.map((row)=>(
+    filteredList.map((row)=>(
         rows.push(
             createData(row.name, row.data_source, row.created_by, row.created_on, <LongMenu/>),
         )
