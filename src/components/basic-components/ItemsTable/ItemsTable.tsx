@@ -320,9 +320,8 @@ export default function EnhancedTable(props:TablePropTypes) {
     
     const rows = [
         createData('Azure SQL1', 'Azure', 'Alex Kim', '07/06/2022', <LongMenu/>),
-        createData('Azure SQL2', 'Azure', 'Andrew', '02/05/2022', <LongMenu/>),
     ];
-    
+
     filteredList.map((row)=>(
         rows.push(
             createData(row.name, row.data_source, row.created_by, row.created_on, <LongMenu/>),
