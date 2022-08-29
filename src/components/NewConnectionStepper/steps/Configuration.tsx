@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "../NewConnection.module.scss";
 import ToggleButtons from "../../../design-core/ToggleSwitcher/ToggleSwitcher";
 import SvgSelector from "../../basic-components/SvgSelector/SvgSelector";
@@ -13,6 +13,7 @@ type PropTypes = {
 }
 
 const Configuration = (props: PropTypes) => {
+    
     const [isParams, setIsParams] = useState(true);
     const [faqIndexes, setFaqIndexes] = useState<number[]>([0]);
     const [faqCounter, setFaqCounter] = useState(0);
@@ -28,7 +29,7 @@ const Configuration = (props: PropTypes) => {
         console.log(faqCounter)
     }
 
-    props.setIsValid(true);
+    props.setIsValid(true)
     return (
         <div className={styles.stepContentBody}>
             <ToggleButtons isParams={isParams} setIsParams={setIsParams}/>

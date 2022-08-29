@@ -203,7 +203,7 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
                 <div className={styles.stepperBody}>
                     {allStepsCompleted() ? (
                         <React.Fragment>
-                            <Typography sx={{mt: 2, mb: 1}}>
+                            <Typography sx={{mt: 2, mb: 1}} component={"span"}>
                                 All steps completed - you&apos;re finished
                             </Typography>
                             <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
@@ -213,7 +213,7 @@ export default function HorizontalNonLinearStepper(props: PropTypes) {
                         </React.Fragment>
                     ) : (
                         <React.Fragment>
-                            <Typography sx={{mt: 2, mb: 1}}>
+                            <Typography sx={{mt: 2, mb: 1}} component={"span"}>
                                 {getStepContent(activeStep)}
                             </Typography>
                             <Box className={styles.stepperBtns} sx={{display: 'flex', flexDirection: 'row', pt: 2}}>

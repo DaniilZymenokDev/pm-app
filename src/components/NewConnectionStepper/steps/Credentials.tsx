@@ -1,6 +1,6 @@
 import React, {Dispatch, SetStateAction, useState} from 'react';
 import styles from "../NewConnection.module.scss";
-import {Input, TextField} from "@mui/material";
+import {TextField} from "@mui/material";
 
 type PropTypes = {
     setUserName:any,

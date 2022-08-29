@@ -11,6 +11,9 @@ type PropTypes={
 
 const ConfigurationParams = (props:PropTypes) => {
 
+    
+    const [inputValue, setInputValue] = useState('')
+
     const configStateBuilder = (key:string, value:string):object =>{
         type singleOptionTypes = {
             key: string,
@@ -30,13 +33,13 @@ const ConfigurationParams = (props:PropTypes) => {
                     <fieldset name={fieldname} key={fieldname} className={styles.paramsItemList}>
                         <div className={  styles.paramsItem}>
                             <label htmlFor="">
-                                <Select size={"small"}>
+                                <Select value={inputValue} size={"small"}>
                                     <MenuItem value={'Timeout'}>Timeout</MenuItem>
                                     <MenuItem value={'Other'}>Other</MenuItem>
                                 </Select>
                             </label>
                             <label htmlFor="">
-                                <Input size={"small"}/>
+                                <Input value={inputValue} size={"small"}/>
                             </label>
                             <IconButton
                                 aria-label="more"

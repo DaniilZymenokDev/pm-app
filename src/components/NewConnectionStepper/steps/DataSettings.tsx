@@ -35,14 +35,14 @@ const DataSettings = (props: PropTypes) => {
         }
         return inputError = errors[0]
     }
-
+    
     return (
         <div className={styles.stepContentBody}>
             <form action="">
                 <label htmlFor="">
                     Data Connection Name *
                     <TextField error={isError&& true} value={props.state.name}
-                               helperText={!props.isValid && inputError} size={"small"} defaultValue={""}
+                               helperText={!props.isValid && inputError} size={"small"} 
                                onChange={(e: ChangeEvent<HTMLInputElement>) => {
                                    props.setConnectionName(e.target.value);validation(e.target.value, props.state.data_source)
                                }}/>
